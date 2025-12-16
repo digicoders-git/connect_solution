@@ -247,7 +247,7 @@ export default function About() {
                 Why Choose Us
               </div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1FA4C4] leading-tight">
-                Why Businesses <span className="text-[#7BC043]">Choose Us</span>
+                Why <span className="text-[#7BC043]">Choose Us</span>
               </h2>
               <div className="w-24 h-1 bg-[#F7941D] rounded-full"></div>
 

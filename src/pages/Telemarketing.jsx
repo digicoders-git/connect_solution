@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Target, Users, CheckCircle, ArrowRight, TrendingUp, BarChart3, Headphones, Award, Shield, Zap } from 'lucide-react';
 import Slider from '../components/Slider';
+import { NavLink } from 'react-router-dom';
 
 const Telemarketing = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -205,10 +206,10 @@ const Telemarketing = () => {
             Let Connect Solution help you reach more customers and grow your business.
           </p>
           
-          <button className="group bg-[#1FA4C4] hover:bg-[#7BC043] text-white px-10 py-4 rounded-full text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3">
+          <NavLink to='/consultation' className="group bg-[#1FA4C4] hover:bg-[#7BC043] text-white px-10 py-4 rounded-full text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3">
             Get Free Consultation
             <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-          </button>
+          </NavLink>
         </div>
       </section>
     </div>

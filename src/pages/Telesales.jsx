@@ -212,10 +212,10 @@ const Telesales = () => {
             Let our expert telesales team help you close more deals and grow revenue.
           </p>
           
-          <button className="group bg-[#F7941D] hover:bg-[#7BC043] text-white px-10 py-4 rounded-full text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3">
+          {/* <button className="group bg-[#F7941D] hover:bg-[#7BC043] text-white px-10 py-4 rounded-full text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3">
             Start Selling Today
             <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-          </button>
+          </button> */}
         </div>
       </section>
     </div>

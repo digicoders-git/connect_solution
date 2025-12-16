@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-html {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 /* Global cursor pointer for all clickable elements */
 button,
 a,

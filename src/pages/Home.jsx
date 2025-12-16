@@ -87,8 +87,11 @@ export default function Home() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1FA4C4]">
                 About <span className="text-[#7BC043]">Connect Solution</span>
               </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Connect Solution is a professional telemarketing and telesales service provider helping businesses generate quality leads and increase sales through ethical and result-driven calling strategies.
+              <p className="text-lg text-[#1F2937] leading-relaxed">
+                <span className='font-semibold text-[#7BC043]'>Connect Solution </span>is a trusted telemarketing and telesales service provider dedicated to helping businesses reach the right audience. We offer reliable <span className="font-semibold text-[#1FA4C4]">outbound and inbound calling services</span> focused on meaningful conversations, quality leads, and measurable growth.
+              </p>
+              <p className="text-lg text-[#6B7280] leading-relaxed">
+                With a skilled team and well-planned calling processes, we support brands in expanding their customer reach while following ethical communication practices. Our method is clear — understand client objectives, engage customers effectively, and deliver consistent results.
               </p>
               <div className="flex gap-4 pt-4">
                 <NavLink to='/about' className="px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg" style={{ backgroundColor: '#F7941D' }}>

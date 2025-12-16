@@ -236,7 +236,7 @@ const Footer = () => {
         {/* Bottom Footer - Copyright */}
         <div className="text-center opacity-0 animate-[fadeIn_1s_ease-in-out_1s_forwards]">
           <p className="text-sm text-[#E5E7EB]">
-            © 2025 Design and Developed by <a href="https://digicoders.in"><span>#TeamDigiCoders</span></a>
+            © 2025 Connect Solution All Rights Reserved | Design and Developed By <a target='_blank' href="https://digicoders.in"><span>#TeamDigiCoders</span></a>
           </p>
         </div>
       </div>

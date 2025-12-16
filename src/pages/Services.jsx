@@ -113,9 +113,9 @@ export default function Services() {
               {/* Text Content */}
               <div className={`space-y-6 ${service.imagePosition === 'left' ? 'md:col-start-2' : ''} ${index % 2 === 0 ? 'animate-slide-in-left' : 'animate-slide-in-right'}`}>
                 {/* Icon Badge */}
-                <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-br from-[#F7941D] to-[#F7941D]/80 text-white rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300">
+                {/* <div className="inline-flex items-center gap-3 p-4 bg-gradient-to-br from-[#F7941D] to-[#F7941D]/80 text-white rounded-2xl shadow-lg hover:scale-105 transition-transform duration-300">
                   {service.icon}
-                </div>
+                </div> */}
 
                 {/* Service Number */}
                 <div className="flex items-center gap-3">
@@ -158,12 +158,12 @@ export default function Services() {
                 </div>
 
                 {/* CTA Button */}
-                <NavLink to='/about' className="pt-6">
+                {/* <NavLink to='/about' className="pt-6">
                   <button className="px-8 py-4 bg-[#1FA4C4] text-white font-semibold rounded-xl hover:bg-[#7BC043] transition-all duration-300 hover:scale-105 hover:shadow-xl shadow-lg flex items-center gap-2 group">
                     Learn More
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
-                </NavLink>
+                </NavLink> */}
               </div>
 
               {/* Image */}
@@ -197,9 +197,9 @@ export default function Services() {
                   </div>
 
                   {/* Floating Badge */}
-                  <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-[#F7941D] to-[#F7941D]/80 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl animate-pulse-slow">
+                  {/* <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-[#F7941D] to-[#F7941D]/80 rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-xl animate-pulse-slow">
                     {service.id}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
