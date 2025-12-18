@@ -171,7 +171,7 @@ const Footer = () => {
               </div>
 
               {/* Social Media */}
-              <div className="pt-2 opacity-0 animate-[fadeIn_0.6s_ease-in-out_0.8s_forwards] flex gap-3">
+              <div className="pt-2 items-center opacity-0 animate-[fadeIn_0.6s_ease-in-out_0.8s_forwards] flex gap-3">
                 <a
                   href="https://www.facebook.com/profile.php?id=100010823233843"
                   target="_blank"
@@ -186,7 +186,7 @@ const Footer = () => {
                 >
                   <Facebook className="w-5 h-5 text-white" />
                 </a>
-                <a
+                {/* <a
                   href="https://www.instagram.com/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -227,7 +227,7 @@ const Footer = () => {
                   }`}
                 >
                   <Linkedin className="w-5 h-5 text-white" />
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
