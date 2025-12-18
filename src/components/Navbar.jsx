@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.jpg';
+import logoo from '../assets/logoo.jpeg';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +41,7 @@ export default function Navbar() {
             to="/"
             className="transition-transform duration-300 hover:scale-105"
           >
-            <img src={logo} alt="Logo" className="h-14" />
+            <img src={logoo} alt="Logo" className="h-14" />
           </NavLink>
 
           {/* Desktop Menu */}
