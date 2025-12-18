@@ -39,7 +39,7 @@ export default function Slider({
   ];
 
   return (
-    <div className="relative w-full h-[35vh] sm:h-[60vh] md:h-100 mt-16">
+    <div className="relative w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] xl:h-[80vh] mt-16">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -61,27 +61,27 @@ export default function Slider({
               />
 
               {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black opacity-70"></div>
+              <div className="absolute inset-0 bg-black opacity-60 sm:opacity-70"></div>
 
               {/* Content */}
               <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
-                <div className="max-w-3xl mx-auto text-center">
+                <div className="max-w-4xl mx-auto text-center">
                   {/* Heading */}
-                  <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4 leading-tight animate-fade-in">
+                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl font-bold text-white mb-2 sm:mb-3 md:mb-4 leading-tight animate-fade-in">
                     {slide.heading}
                   </h1>
 
                   {/* Subheading */}
-                  <p className="text-sm sm:text-base md:text-xl text-white mb-4 sm:mb-6 leading-relaxed animate-fade-in-delay">
+                  <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white mb-3 sm:mb-4 md:mb-6 leading-relaxed animate-fade-in-delay px-2">
                     {slide.subheading}
                   </p>
 
                   {/* Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delay-2">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center animate-fade-in-delay-2">
                     {/* Primary Button */}
                     <NavLink to="/consultation">
                       <button
-                        className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-white text-sm sm:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                        className="w-full sm:w-auto px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg font-semibold text-white text-xs sm:text-sm md:text-base transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
                         style={{ backgroundColor: "#F7941D" }}
                         onMouseEnter={(e) =>
                           (e.target.style.backgroundColor = "#d87a15")
@@ -95,7 +95,7 @@ export default function Slider({
                   </NavLink>
 
                     {/* Secondary Button */}
-                    <a href="tel:+91 88810 55055" className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-semibold text-white text-sm sm:text-base border-2 border-white bg-transparent transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-[#1FA4C4]">
+                    <a href="tel:+91 88810 55055" className="w-full sm:w-auto px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-lg font-semibold text-white text-xs sm:text-sm md:text-base border-2 border-white bg-transparent transition-all duration-300 transform hover:scale-105 hover:bg-white hover:text-[#1FA4C4]">
                       Call Now
                     </a>
                   </div>
