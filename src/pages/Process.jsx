@@ -1,30 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Phone, Target, Lightbulb, Users, CheckCircle, BarChart3, ArrowRight, ChevronDown } from 'lucide-react';
 import Slider from '../components/Slider';
 import { NavLink } from 'react-router-dom';
 
 const Process = () => {
   const [activeStep, setActiveStep] = useState(null);
-  const [isVisible, setIsVisible] = useState({});
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible((prev) => ({ ...prev, [entry.target.id]: true }));
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   const steps = [
     {
@@ -92,18 +72,12 @@ const Process = () => {
       />
 
       {/* Process Overview */}
-      <section 
-        id="overview" 
-        data-animate
-        className={`py-16 px-6 bg-white transition-all duration-1000 ${
-          isVisible.overview ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
+      <section className="py-12 md:py-16 px-4 sm:px-6 bg-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1FA4C4] mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1FA4C4] mb-6">
             Process Overview
           </h2>
-          <p className="text-lg text-[#1F2937] leading-relaxed">
+          <p className="text-base md:text-lg text-[#1F2937] leading-relaxed">
             At Connect Solution, we follow a well-defined and result-oriented process to ensure every calling campaign delivers value. Our approach focuses on understanding client objectives, engaging customers professionally, and{' '}
             <span className="text-[#7BC043] font-semibold">continuously improving performance</span>{' '}
             through analysis and reporting.
@@ -120,55 +94,48 @@ const Process = () => {
           return (
             <div
               key={index}
-              id={`step-${index}`}
-              data-animate
-              className={`${step.bg} transition-all duration-1000 ${
-                isVisible[`step-${index}`] ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
-              }`}
+              className={`${step.bg}`}
             >
-              <div className="max-w-6xl mx-auto px-6 py-16">
-                <div className={`flex flex-col ${step.align === 'right' ? 'md:flex-row-reverse' : 'md:flex-row'} gap-8 items-center`}>
+              <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-16">
+                <div className={`flex flex-col ${step.align === 'right' ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-6 lg:gap-8 items-center`}>
                   {/* Icon Section */}
-                  <div className="flex-shrink-0 relative group">
-                    <div className="w-32 h-32 bg-white rounded-2xl shadow-lg flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#F7941D] to-[#f7941d80] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                      <Icon className="w-16 h-16 text-[#F7941D] relative z-10" strokeWidth={1.5} />
+                  <div className="flex-shrink-0 relative">
+                    <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl shadow-lg flex items-center justify-center">
+                      <Icon className="w-12 h-12 md:w-16 md:h-16 text-[#F7941D]" strokeWidth={1.5} />
                     </div>
                     
                     {/* Step Number Badge */}
-                    <div className="absolute -top-4 -right-4 w-12 h-12 bg-[#F7941D] text-white rounded-full flex items-center justify-center text-xl font-bold shadow-lg animate-pulse">
+                    <div className="absolute -top-2 -right-2 md:-top-4 md:-right-4 w-8 h-8 md:w-12 md:h-12 bg-[#F7941D] text-white rounded-full flex items-center justify-center text-sm md:text-xl font-bold shadow-lg">
                       {step.number}
                     </div>
                   </div>
 
                   {/* Content Section */}
-                  <div className="flex-1">
+                  <div className="flex-1 text-center lg:text-left">
                     <div 
                       className="cursor-pointer"
                       onClick={() => setActiveStep(isActive ? null : index)}
                     >
-                      <h3 className="text-2xl md:text-3xl font-bold text-[#1FA4C4] mb-4 hover:text-[#F7941D] transition-colors duration-300">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#1FA4C4] mb-4">
                         Step {step.number}: {step.title}
                       </h3>
                       
-                      <p className="text-[#1F2937] text-lg leading-relaxed mb-4">
+                      <p className="text-[#1F2937] text-base md:text-lg leading-relaxed mb-4">
                         {step.description}
                       </p>
                       
-                      <div className={`overflow-hidden transition-all duration-500 ${
-                        isActive ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
-                      }`}>
+                      {isActive && (
                         <div className="bg-white border-l-4 border-[#7BC043] p-4 rounded-r-lg shadow-sm mt-4">
                           <p className="text-sm font-semibold text-[#7BC043] mb-2">
                             ✓ Outcome:
                           </p>
-                          <p className="text-[#1F2937]">{step.outcome}</p>
+                          <p className="text-[#1F2937] text-sm md:text-base">{step.outcome}</p>
                         </div>
-                      </div>
+                      )}
 
                       {/* Expand Indicator */}
                       {!isActive && (
-                        <button className="mt-4 text-[#1FA4C4] hover:text-[#F7941D] flex items-center gap-2 font-semibold transition-colors duration-300">
+                        <button className="mt-4 text-[#1FA4C4] flex items-center gap-2 font-semibold mx-auto lg:mx-0">
                           View Outcome <ArrowRight className="w-4 h-4" />
                         </button>
                       )}
@@ -178,8 +145,8 @@ const Process = () => {
 
                 {/* Connection Line */}
                 {index < steps.length - 1 && (
-                  <div className="flex justify-center mt-8">
-                    <div className="w-1 h-12 bg-gradient-to-b from-[#1FA4C4] to-transparent rounded-full animate-pulse"></div>
+                  <div className="flex justify-center mt-6 md:mt-8">
+                    <div className="w-1 h-8 md:h-12 bg-gradient-to-b from-[#1FA4C4] to-transparent rounded-full"></div>
                   </div>
                 )}
               </div>
@@ -189,30 +156,24 @@ const Process = () => {
       </section>
 
       {/* CTA Section */}
-      <section 
-        id="cta" 
-        data-animate
-        className={`bg-[#F7941D] text-white py-20 px-6 relative overflow-hidden transition-all duration-1000 ${
-          isVisible.cta ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
-      >
+      <section className="bg-[#F7941D] text-white py-16 md:py-20 px-4 sm:px-6 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#1FA4C4] rounded-full blur-3xl"></div>
         </div>
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 animate-fade-in">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-6">
             Want to Start a Result-Driven Telemarketing Campaign?
           </h2>
           
-          <p className="text-lg md:text-xl mb-10 text-orange-100 animate-fade-in-delay">
+          <p className="text-base md:text-lg lg:text-xl mb-8 md:mb-10 text-orange-100">
             Let Connect Solution manage your calling process with professionalism and transparency.
           </p>
           
-          <NavLink to='/consultation' className="group bg-[#1FA4C4] hover:bg-[#7BC043] text-white px-10 py-4 rounded-full text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 inline-flex items-center gap-3">
+          <NavLink to='/consultation' className="bg-[#1FA4C4] hover:bg-[#7BC043] text-white px-6 md:px-10 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold shadow-2xl transition-all duration-300 inline-flex items-center gap-3">
             Get Free Consultation
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+            <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
           </NavLink>
         </div>
       </section>
