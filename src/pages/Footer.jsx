@@ -121,9 +121,14 @@ const Footer = () => {
                   }`} 
                 />
                 <div>
-                  <p className="text-sm text-[#E5E7EB] group-hover:text-white transition-colors">
-                    +91 88810 55055
-                  </p>
+                  <div className="space-y-1">
+                    <a href="tel:+918881055055" className="block text-sm text-[#E5E7EB] group-hover:text-white hover:text-[#F7941D] transition-colors">
+                      +91 8881055055
+                    </a>
+                    <a href="tel:+918881033033" className="block text-sm text-[#E5E7EB] group-hover:text-white hover:text-[#F7941D] transition-colors">
+                      +91 8881033033
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -231,6 +236,27 @@ const Footer = () => {
         {/* Divider Line */}
         <div className="my-8 lg:my-12 opacity-0 animate-[fadeIn_1s_ease-in-out_0.9s_forwards]">
           <div className="h-[2px] bg-gradient-to-r from-transparent via-[#7BC043] to-transparent opacity-50"></div>
+        </div>
+
+        {/* Legal Links */}
+        <div className="text-center mb-6 opacity-0 animate-[fadeIn_1s_ease-in-out_0.9s_forwards]">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
+            {/* <h4 className="text-white font-semibold text-sm">Legal:</h4> */}
+            <div className="flex gap-6">
+              <Link 
+                to="/terms-conditions"
+                className="text-sm text-[#E5E7EB] hover:text-[#F7941D] transition-colors duration-300 hover:underline"
+              >
+                Terms and Conditions
+              </Link>
+              <Link 
+                to="/privacy-policy"
+                className="text-sm text-[#E5E7EB] hover:text-[#F7941D] transition-colors duration-300 hover:underline"
+              >
+                Privacy Policy
+              </Link>
+            </div>
+          </div>
         </div>
 
         {/* Bottom Footer - Copyright */}

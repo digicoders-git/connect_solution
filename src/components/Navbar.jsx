@@ -22,6 +22,7 @@ export default function Navbar() {
     { name: 'Process', href: '/process' },
     { name: 'Why Choose Us', href: '/WhyChooseUs' },
     { name: 'Gallery', href: '/gallery' },
+    { name: 'Career', href: '/career' },
     { name: 'Contact Us', href: '/contact' }
   ];
 

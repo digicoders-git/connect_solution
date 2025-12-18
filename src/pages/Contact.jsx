@@ -43,7 +43,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone Number',
-      content: '+91 88810 55055',
+      content: '+91 8881055055 / 8881033033',
       subContent: 'Available during business hours',
       color: '#7BC043'
     },

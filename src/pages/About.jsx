@@ -2,6 +2,7 @@ import { Target, Eye, Shield, Users, TrendingUp, Award, CheckCircle, Phone, Spar
 import Slider from '../components/Slider';
 import img7 from '../assets/img7.jpg'
 import { NavLink } from 'react-router-dom';
+import owner from '../assets/owner.jpg'
 
 export default function About() {
   const values = [
@@ -52,8 +53,78 @@ export default function About() {
         img3="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80"
       />
 
+      {/* Managing Director Section */}
+      <section className="py-8 md:py-12 bg-white relative overflow-hidden">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-[#1FA4C4]/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-64 h-64 bg-[#F7941D]/5 rounded-full blur-3xl"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 animate-fade-in">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#1FA4C4]/10 rounded-full text-[#1FA4C4] font-semibold text-sm mb-4">
+              <Users className="w-4 h-4" />
+              Leadership
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1FA4C4] mb-4">
+              Meet Our <span className="text-[#7BC043]">Managing Director</span>
+            </h2>
+            <div className="w-24 h-1 bg-[#F7941D] mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-slide-in-left relative">
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#7BC043] rounded-full opacity-20 blur-3xl"></div>
+              <div className="absolute -bottom-6 -left-6 w-40 h-40 bg-[#F7941D] rounded-full opacity-20 blur-3xl"></div>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#1FA4C4] hover:scale-105 transition-transform duration-500">
+                <img 
+                  src={owner} 
+                  alt="Mr. Jitesh Kumar Dhameja - Managing Director" 
+                  className="w-full h-full object-cover aspect-4/5"
+                />
+                <div className="absolute inset-0 bg-linear-to-t opacity-70 from-[#1FA4C4]/80 via-transparent to-transparent flex items-end p-6">
+                  <div className="text-white">
+                    <h3 className="text-xl font-bold mb-1">Mr. Jitesh Kumar Dhameja</h3>
+                    <p className="text-white/90 text-sm">Managing Director</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-6 animate-slide-in-right">
+              <div className="bg-gradient-to-br from-[#1FA4C4]/10 to-transparent p-6 rounded-2xl border-l-4 border-[#1FA4C4]">
+                <h3 className="text-2xl font-bold text-[#1FA4C4] mb-2">Mr. Jitesh Kumar Dhameja</h3>
+                <p className="text-[#F7941D] font-semibold mb-4">Managing Director</p>
+              </div>
+              
+              <div className="space-y-4">
+                <p className="text-[#1F2937] leading-relaxed">
+                  Mr. Jitesh Kumar Dhameja is a seasoned banking professional with over <span className="font-semibold text-[#1FA4C4]">12 years of extensive experience</span> in the financial services sector, spanning India and the Middle East.
+                </p>
+                
+                <p className="text-[#1F2937] leading-relaxed">
+                  He holds a <span className="font-semibold text-[#7BC043]">Bachelor of Engineering (B.E.) from Amity University</span> and an <span className="font-semibold text-[#7BC043]">MBA from Jaipuria Institute of Management</span>, equipping him with a strong foundation in both technical and managerial disciplines.
+                </p>
+                
+                <p className="text-[#1F2937] leading-relaxed">
+                  Mr. Dhameja began his professional journey with <span className="font-semibold text-[#1FA4C4]">Deutsche Bank, New Delhi</span>, where he gained valuable exposure to global banking operations and financial systems. Driven by his passion for growth and international exposure, he later moved to the UAE, where he built a distinguished career across leading banking institutions.
+                </p>
+                
+                <p className="text-[#1F2937] leading-relaxed">
+                  Over the years, he has held senior leadership roles with renowned banks including <span className="font-semibold text-[#F7941D]">Mashreq Bank and Emirates Islamic Bank</span>, contributing significantly to business growth, operational excellence, and customer-centric banking solutions.
+                </p>
+                
+                <div className="bg-gradient-to-r from-[#7BC043]/10 to-transparent p-4 rounded-xl border-l-4 border-[#7BC043]">
+                  <p className="text-[#1F2937] leading-relaxed font-medium">
+                    With deep expertise in banking operations, strategic management, and leadership, Mr. Dhameja brings a wealth of knowledge and global perspective to the organization, guiding it with vision, integrity, and a results-driven approach.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Company Introduction */}
-      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <section className="py-8 md:py-12 bg-white relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-20 right-0 w-96 h-96 bg-[#7BC043]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-0 w-96 h-96 bg-[#1FA4C4]/5 rounded-full blur-3xl"></div>
@@ -118,7 +189,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-16 md:py-24 bg-[#F8FAFC] relative overflow-hidden">
+      <section className="py-8 md:py-12 bg-[#F8FAFC] relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#1FA4C4] via-[#7BC043] to-[#F7941D]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,7 +251,7 @@ export default function About() {
       </section>
 
       {/* Our Values */}
-      <section className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <section className="py-8 md:py-12 bg-white relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-20 left-20 w-64 h-64 bg-[#F7941D]/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-64 h-64 bg-[#7BC043]/5 rounded-full blur-3xl"></div>
@@ -232,7 +303,7 @@ export default function About() {
       </section>
 
       {/* Why Trust Us */}
-      <section className="py-16 md:py-24 bg-[#F8FAFC] relative overflow-hidden">
+      <section className="py-8 md:py-12 bg-[#F8FAFC] relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-1/4 w-64 h-64 border-4 border-[#1FA4C4] rounded-full"></div>
@@ -312,7 +383,7 @@ export default function About() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-[#1FA4C4] to-[#1890b0] relative overflow-hidden">
+      <section className="py-8 md:py-12 bg-gradient-to-br from-[#1FA4C4] to-[#1890b0] relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full animate-pulse"></div>

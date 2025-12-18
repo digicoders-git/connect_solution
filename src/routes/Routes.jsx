@@ -9,6 +9,9 @@ import Telemarketing from "../pages/Telemarketing";
 import Telesales from "../pages/Telesales";
 import LeadGeneration from "../pages/LeadGeneration";
 import Consultation from "../pages/Consultation";
+import TermsConditions from "../pages/TermsConditions";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import Career from "../pages/Career";
 
 export const appRoutes = [
   {path:"/", component: Home},
@@ -23,4 +26,7 @@ export const appRoutes = [
   {path:"/telesales", component: Telesales},
   {path:"/lead-generation", component: LeadGeneration},
   {path:"/consultation", component: Consultation},
+  {path:"/terms-conditions", component: TermsConditions},
+  {path:"/privacy-policy", component: PrivacyPolicy},
+  {path:"/career", component: Career},
 ]
