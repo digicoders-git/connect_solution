@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { User, Mail, Phone, MapPin, Upload, Briefcase, GraduationCap, Send, CheckCircle } from 'lucide-react';
 import Slider from '../components/Slider';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Career = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    position: '',
+    mobile: '',
+    positionAppliedFor: '',
     experience: '',
-    location: '',
-    cv: null
+    currentLocation: '',
+    resume: null
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState({ type: '', message: '' });
@@ -22,30 +25,51 @@ const Career = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData(prev => ({ ...prev, cv: file }));
+    setFormData(prev => ({ ...prev, resume: file }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.email || !formData.phone || !formData.position || !formData.cv) {
-      setFormStatus({
-        type: 'error',
-        message: 'Please fill in all required fields and upload your CV.'
-      });
+    if (!formData.name || !formData.email || !formData.mobile || !formData.positionAppliedFor || !formData.resume) {
+      toast.error('Please fill in all required fields and upload your resume.');
       return;
     }
 
     setIsSubmitting(true);
     
-    setTimeout(() => {
-      setFormStatus({
-        type: 'success',
-        message: 'Thank you for your application! We will review your CV and get back to you soon.'
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('mobile', formData.mobile);
+      formDataToSend.append('positionAppliedFor', formData.positionAppliedFor);
+      formDataToSend.append('experience', formData.experience);
+      formDataToSend.append('currentLocation', formData.currentLocation);
+      formDataToSend.append('resume', formData.resume);
+
+      const response = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/career/create`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
-      setFormData({ name: '', email: '', phone: '', position: '', experience: '', location: '', cv: null });
+      
+      if (response.status === 200 || response.status === 201) {
+        toast.success('Application submitted successfully! We will review your resume and get back to you soon.');
+        setFormData({ name: '', email: '', mobile: '', positionAppliedFor: '', experience: '', currentLocation: '', resume: null });
+        document.getElementById('resume-upload').value = '';
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(`Error: ${error.response.data.message || 'Failed to submit application'}`);
+      } else if (error.request) {
+        toast.error('Network error. Please check your connection and try again.');
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -136,8 +160,8 @@ const Career = () => {
                     <Phone className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                     <input
                       type="tel"
-                      name="phone"
-                      value={formData.phone}
+                      name="mobile"
+                      value={formData.mobile}
                       onChange={handleChange}
                       placeholder="Enter your phone number"
                       className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300"
@@ -153,8 +177,8 @@ const Career = () => {
                   <div className="relative">
                     <Briefcase className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                     <select
-                      name="position"
-                      value={formData.position}
+                      name="positionAppliedFor"
+                      value={formData.positionAppliedFor}
                       onChange={handleChange}
                       className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300 appearance-none cursor-pointer"
                       required
@@ -201,8 +225,8 @@ const Career = () => {
                     <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
-                      name="location"
-                      value={formData.location}
+                      name="currentLocation"
+                      value={formData.currentLocation}
                       onChange={handleChange}
                       placeholder="Enter your current location"
                       className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300"
@@ -218,20 +242,20 @@ const Career = () => {
                 <div className="relative">
                   <input
                     type="file"
-                    name="cv"
+                    name="resume"
                     onChange={handleFileChange}
-                    accept=".pdf,.doc,.docx"
+                    // accept=".pdf,.doc,.docx"
                     className="hidden"
-                    id="cv-upload"
+                    id="resume-upload"
                     required
                   />
                   <label
-                    htmlFor="cv-upload"
+                    htmlFor="resume-upload"
                     className="w-full flex items-center justify-center gap-3 py-4 px-6 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-[#1FA4C4] hover:bg-gray-50 transition-all duration-300"
                   >
                     <Upload className="w-6 h-6 text-gray-400" />
                     <span className="text-gray-600">
-                      {formData.cv ? formData.cv.name : 'Click to upload CV/Resume (PDF, DOC, DOCX)'}
+                      {formData.resume ? formData.resume.name : 'Click to upload CV/Resume (jpg, png)'}
                     </span>
                   </label>
                 </div>
@@ -278,6 +302,19 @@ const Career = () => {
           </div>
         </div>
       </section>
+      
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

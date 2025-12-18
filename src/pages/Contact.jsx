@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail, Send, CheckCircle, AlertCircle, Clock, ChevronDown } from 'lucide-react';
 import Slider from '../components/Slider';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState({});
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
+    mobile: '',
     email: '',
     message: ''
   });
@@ -61,33 +64,34 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Validation
-    if (!formData.name || !formData.phone || !formData.email || !formData.message) {
-      setFormStatus({
-        type: 'error',
-        message: 'Please fill in all required fields.'
-      });
+    if (!formData.name || !formData.mobile || !formData.email || !formData.message) {
+      toast.error('Please fill in all required fields.');
       return;
     }
 
     setIsSubmitting(true);
     setFormStatus({ type: '', message: '' });
 
-    // Simulate form submission
-    setTimeout(() => {
-      setFormStatus({
-        type: 'success',
-        message: 'Thank you for contacting us! We will get back to you shortly.'
-      });
-      setFormData({ name: '', phone: '', email: '', message: '' });
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/contact/create`, formData);
+      
+      if (response.status === 200 || response.status === 201) {
+        toast.success('Thank you for contacting us! We will get back to you shortly.');
+        setFormData({ name: '', mobile: '', email: '', message: '' });
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(`Error: ${error.response.data.message || 'Failed to send message'}`);
+      } else if (error.request) {
+        toast.error('Network error. Please check your connection and try again.');
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    } finally {
       setIsSubmitting(false);
-
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setFormStatus({ type: '', message: '' });
-      }, 5000);
-    }, 1500);
+    }
   };
 
   return (
@@ -245,8 +249,8 @@ const Contact = () => {
                     </label>
                     <input
                       type="tel"
-                      name="phone"
-                      value={formData.phone}
+                      name="mobile"
+                      value={formData.mobile}
                       onChange={handleChange}
                       placeholder="Enter your contact number"
                       className="w-full px-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300 bg-white"
@@ -358,6 +362,19 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
 
       <style jsx>{`
         @keyframes slide-down {
