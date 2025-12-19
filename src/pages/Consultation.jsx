@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Phone, Mail, User, MessageSquare, Send, CheckCircle } from 'lucide-react';
 import Slider from '../components/Slider';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 const Consultation = () => {
   const [formData, setFormData] = useState({
@@ -12,33 +15,77 @@ const Consultation = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState({ type: '', message: '' });
+  const [errors, setErrors] = useState({});
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^[6-9]\d{9}$/;
+    return phoneRegex.test(phone.replace(/\s+/g, ''));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.phone || !formData.email) {
-      setFormStatus({
-        type: 'error',
-        message: 'Please fill in all required fields.'
-      });
+    const newErrors = {};
+    
+    // Validate required fields
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    
+    // Validate phone format
+    if (formData.phone && !validatePhone(formData.phone)) {
+      newErrors.phone = 'Please enter a valid 10-digit Indian mobile number';
+    }
+    
+    // Validate email format
+    if (formData.email && !validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+    
+    setErrors(newErrors);
+    
+    if (Object.keys(newErrors).length > 0) {
+      toast.error('Please fix the errors below');
       return;
     }
 
     setIsSubmitting(true);
+    setFormStatus({ type: '', message: '' });
     
-    setTimeout(() => {
-      setFormStatus({
-        type: 'success',
-        message: 'Thank you! We will contact you within 24 hours for your free consultation.'
-      });
-      setFormData({ name: '', phone: '', email: '', business: '', message: '' });
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_APP_BASE_URL}/consultation/create`, formData);
+      
+      if (response.status === 200 || response.status === 201) {
+        toast.success('Thank you! We will contact you within 24 hours for your free consultation.');
+        setFormData({ name: '', phone: '', email: '', business: '', message: '' });
+        setErrors({});
+      }
+    } catch (error) {
+      if (error.response) {
+        toast.error(`Error: ${error.response.data.message || 'Failed to submit consultation request'}`);
+      } else if (error.request) {
+        toast.error('Network error. Please check your connection and try again.');
+      } else {
+        toast.error('Something went wrong. Please try again.');
+      }
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -81,6 +128,22 @@ const Consultation = () => {
               </div>
             )}
 
+            {Object.keys(errors).length > 0 && (
+              <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200">
+                <div className="flex items-start gap-3">
+                  <MessageSquare className="w-5 h-5 text-red-600 mt-0.5" />
+                  <div>
+                    {/* <h4 className="text-red-800 font-semibold mb-2">Please fix the following errors:</h4> */}
+                    <ul className="text-red-700 text-sm space-y-1">
+                      {errors.name && <li>• {errors.name}</li>}
+                      {errors.phone && <li>• {errors.phone}</li>}
+                      {errors.email && <li>• {errors.email}</li>}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -95,10 +158,13 @@ const Consultation = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your full name"
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300"
+                      className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 focus:outline-none transition-all duration-300 ${
+                        errors.name ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#1FA4C4]'
+                      }`}
                       required
                     />
                   </div>
+                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                 </div>
 
                 <div>
@@ -112,11 +178,14 @@ const Consultation = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="Enter your phone number"
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300"
+                      placeholder="Enter 10-digit mobile number"
+                      className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 focus:outline-none transition-all duration-300 ${
+                        errors.phone ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#1FA4C4]'
+                      }`}
                       required
                     />
                   </div>
+                  {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                 </div>
               </div>
 
@@ -133,10 +202,13 @@ const Consultation = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Enter your email address"
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border-2 border-gray-300 focus:border-[#1FA4C4] focus:outline-none transition-all duration-300"
+                      className={`w-full pl-10 pr-4 py-3 rounded-lg border-2 focus:outline-none transition-all duration-300 ${
+                        errors.email ? 'border-red-500 focus:border-red-500' : 'border-gray-300 focus:border-[#1FA4C4]'
+                      }`}
                       required
                     />
                   </div>
+                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                 </div>
 
                 <div>
@@ -226,6 +298,19 @@ const Consultation = () => {
           </div>
         </div>
       </section>
+      
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
