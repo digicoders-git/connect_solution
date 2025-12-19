@@ -244,7 +244,7 @@ const Career = () => {
                     type="file"
                     name="resume"
                     onChange={handleFileChange}
-                    // accept=".pdf,.doc,.docx"
+                    accept=".pdf"
                     className="hidden"
                     id="resume-upload"
                     required
@@ -255,7 +255,7 @@ const Career = () => {
                   >
                     <Upload className="w-6 h-6 text-gray-400" />
                     <span className="text-gray-600">
-                      {formData.resume ? formData.resume.name : 'Click to upload CV/Resume (jpg, png)'}
+                      {formData.resume ? formData.resume.name : 'Click to upload CV/Resume (PDF only)'}
                     </span>
                   </label>
                 </div>
