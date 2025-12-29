@@ -144,9 +144,9 @@ const Footer = () => {
                   }`} 
                 />
                 <div>
-                  <p className="text-sm text-[#E5E7EB] break-words group-hover:text-white transition-colors">
-                    jiteshdhameja191990@gmail.com
-                  </p>
+                  <a href='mailto:jkd@connectsolution.co.in' className="text-sm text-[#E5E7EB] break--breake-words group-hover:text-white transition-colors">
+                    jkd@connectsolution.co.in
+                  </a>
                 </div>
               </div>
 
